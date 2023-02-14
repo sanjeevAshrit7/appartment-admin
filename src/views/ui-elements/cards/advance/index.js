@@ -34,7 +34,7 @@ const Cards = () => {
   return (
     <Fragment>
       <Breadcrumbs title='Advanced Cards' data={[{ title: 'Cards' }, { title: 'Advanced Card' }]} />
-      <Row className='match-height'>
+      <Row className='match-height' >
         <Col md='6' lg='7' sm='12'>
           <CardCongratulations />
         </Col>

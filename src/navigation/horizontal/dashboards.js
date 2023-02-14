@@ -18,6 +18,12 @@ export default [
         title: 'Notices',
         icon: <ShoppingCart />,
         navLink: '/dashboard/ecommerce'
+      },
+      {
+        id: 'owners',
+        title: 'Owners',
+        icon: <ShoppingCart />,
+        navLink: '/dashboard/owners'
       }
     ]
   }
