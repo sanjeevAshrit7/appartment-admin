@@ -27,7 +27,8 @@ const Router = () => {
 
   const allRoutes = getRoutes(layout)
   const getHomeRoute = () => {
-    const user = getUserData()
+    const user = getUserData();
+    console.log('user', user)
     if (user) {
       return getHomeRouteForLoggedInUser(user.role)
     } else {

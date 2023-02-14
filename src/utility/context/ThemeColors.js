@@ -47,6 +47,7 @@ const ThemeContext = ({ children }) => {
       }
 
       setColors({ ...obj })
+      console.log('color', obj)
     }
   }, [])
 

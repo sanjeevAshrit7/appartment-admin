@@ -46,6 +46,7 @@ import illustrationsDark from '@src/assets/images/pages/login-v2-dark.svg'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { formatDate } from '../../../utility/Utils'
 
 const ToastContent = ({ t, name, role }) => {
   return (
@@ -85,6 +86,7 @@ const Login = () => {
   const source = skin === 'dark' ? illustrationsDark : illustrationsLight
 
   const onSubmit = data => {
+    console.log('data', data)
     if (Object.values(data).every(field => field.length > 0)) {
       useJwt
         .login({ email: data.loginEmail, password: data.password })
@@ -96,11 +98,15 @@ const Login = () => {
           toast(t => (
             <ToastContent t={t} role={data.role || 'admin'} name={data.fullName || data.username || 'John Doe'} />
           ))
+          console.log('res', res)
         })
-        .catch(err => setError('loginEmail', {
-            type: 'manual',
-            message: err.response.data.error
-          })
+        .catch((err) => {
+            console.log('err', err)
+            setError('loginEmail', {
+              type: 'manual',
+              message: err.response.data.error
+            })
+          }
         )
     } else {
       for (const key in data) {

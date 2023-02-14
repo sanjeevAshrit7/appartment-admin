@@ -20,6 +20,12 @@ export default [
         title: 'Notices',
         icon: <Circle size={12} />,
         navLink: '/dashboard/ecommerce'
+      },
+      {
+        id: 'owners',
+        title: 'Owners',
+        icon: <Circle/>,
+        navLink: '/dashboard/owners'
       }
     ]
   }
