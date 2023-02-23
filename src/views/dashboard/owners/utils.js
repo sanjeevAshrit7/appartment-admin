@@ -2,6 +2,7 @@ import { isEmpty } from "lodash";
 import { Fragment } from "react";
 import { X } from "react-feather";
 import { toast } from "react-hot-toast";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { deployedApiUrl, localApiUrl } from "../../../utility/Utils";
 
 let token = localStorage?.getItem('AdminToken');
@@ -10,7 +11,7 @@ let token = localStorage?.getItem('AdminToken');
 export const getVerifiedUsers = async ( setUserData ) => {
     let localUrl = `${localApiUrl}/verifiedUser`;
     let deployedUrl = `${deployedApiUrl}/verifiedUser`
-    console.log('token', token)
+    // console.log('token', token)
 
     await fetch(deployedUrl,
         {
@@ -188,3 +189,87 @@ export const columns = [
         },
     },
 ];
+
+export const Paginantion = ({
+    length,
+    data = [],
+    setPage,
+    page
+}) => {
+    return (
+        <Pagination aria-label="Page navigation example" className="pt-1">
+            <PaginationItem
+                disabled={page === 0}
+                onClick={() => {
+                    setPage(0)
+                }}
+            >
+                <PaginationLink
+                    first
+                />
+            </PaginationItem>
+            <PaginationItem
+                disabled={page === 0}
+                onClick={() => {
+                    if (page !== 0) {
+                        setPage(page - 1)
+                    }
+                }}
+            >
+                <PaginationLink
+
+                    previous
+                />
+            </PaginationItem>
+            {
+                data?.map((item, index) => {
+                    // console.log('index', index)
+                    return (
+                        <PaginationItem
+                            active={
+                                page === index
+                            }
+                            onClick={() => {
+                                setPage(index)
+                            }}
+                        >
+                            <PaginationLink >
+                                {index +1 }
+                            </PaginationLink>
+                        </PaginationItem>
+                    )
+                })
+            }
+            <PaginationItem
+                disabled={page === data?.length - 1}
+                onClick={() => {
+                    if (page !== data?.length - 1) {
+                        setPage(page + 1)
+                    }
+                }}
+            >
+                <PaginationLink
+                    next
+                />
+            </PaginationItem>
+            <PaginationItem
+                disabled={page === data?.length-1}
+                onClick={() => {
+                    setPage(data.length-1)
+                }}
+            >
+                <PaginationLink
+                    last
+                />
+            </PaginationItem>
+        </Pagination>
+    )
+}
+
+export const getArray = (length) => {
+    let traversy = [];
+    for (let i = 0; i < length; i++) {
+        traversy.push(i)
+    };
+    return traversy;
+}

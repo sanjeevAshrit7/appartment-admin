@@ -54,7 +54,7 @@ const EcommerceDashboard = () => {
                     </Col>
                 </Row>
                 <Row className='match-height'>
-                    <Col lg='12' xs='12'>
+                    <Col lg='12' xs='12' className='pb-5'>
                         <OwnersTable
                             userData={userData}
                             setUserData={setUserData}

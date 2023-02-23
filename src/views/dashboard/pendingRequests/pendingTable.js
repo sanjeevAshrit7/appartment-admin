@@ -28,7 +28,7 @@ const PendingTable = (props) => {
     // ** vars
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedrequest, setSelectedrequest] = useState([])
+    const [selectedrequest, setSelectedrequest] = useState([]);
 
     const colorsArr = {
         Technology: 'light-primary',
@@ -84,7 +84,6 @@ const PendingTable = (props) => {
         callPendingRequestsApi()
     }, [])
 
-    console.log('userResponse', userData)
     return (
         <div className='mt-5'>
             {
