@@ -23,10 +23,10 @@ import CardBrowserStates from '@src/views/ui-elements/cards/advance/CardBrowserS
 // ** Styles
 import '@styles/react/libs/charts/apex-charts.scss'
 import '@styles/base/pages/dashboard-ecommerce.scss'
-import OwnersTable from './ownersTable'
 import SideBar from './sideBar'
+import PendingTable from './pendingTable'
 
-const EcommerceDashboard = () => {
+const PendingRequests = () => {
 
     const [openTaskSidebar, setOpenTaskSidebar] = useState(false);
     const [userData, setUserData] = useState([]);
@@ -42,20 +42,8 @@ const EcommerceDashboard = () => {
         <div id='dashboard-owners'>
             <div id='dashboard-owners' style={{ width: '100%' }}>
                 <Row className='match-height'>
-                    <Col lg='4' xs='12'>
-                        <Button
-                            color='primary'
-                            block
-                            onClick={() => {
-                                setOpenTaskSidebar(!openTaskSidebar);
-                            }}>
-                            <span className='align-middle'>Add Owner</span>
-                        </Button>
-                    </Col>
-                </Row>
-                <Row className='match-height'>
                     <Col lg='12' xs='12'>
-                        <OwnersTable
+                        <PendingTable
                             userData={userData}
                             setUserData={setUserData}
                         />
@@ -66,10 +54,10 @@ const EcommerceDashboard = () => {
                 open={openTaskSidebar}
                 setOpen={setOpenTaskSidebar}
                 handleTaskSidebar={handleTaskSidebar}
-                setAllOwners={setUserData}
+                requests={userData}         
             />
         </div>
     )
 }
 
-export default EcommerceDashboard
+export default PendingRequests;

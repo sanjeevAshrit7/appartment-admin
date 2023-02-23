@@ -1,0 +1,190 @@
+import { isEmpty } from "lodash";
+import { Fragment } from "react";
+import { X } from "react-feather";
+import { toast } from "react-hot-toast";
+import { deployedApiUrl, localApiUrl } from "../../../utility/Utils";
+
+let token = localStorage?.getItem('AdminToken');
+
+//using fectch calls instaed of axios temporarily
+export const getVerifiedUsers = async ( setUserData ) => {
+    let localUrl = `${localApiUrl}/verifiedUser`;
+    let deployedUrl = `${deployedApiUrl}/verifiedUser`
+    console.log('token', token)
+
+    await fetch(deployedUrl,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+    )
+        .then(async (response) => {
+            let res = await response.json();
+            console.log('res getVerified user', res?.usersResponse)
+            setUserData(res?.usersResponse?.map((item) => ({
+                ...item, value: item?.name, label: item?.name
+            })))
+        })
+        .catch((error) => {
+            console.log('error', error)
+        })
+};
+
+export const getAppartments = async ( setAppartments ) => {
+    let localUrl = `${localApiUrl}/apartment`;
+    let deployedUrl = `${deployedApiUrl}/apartment`;
+
+    await fetch(deployedUrl,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+    )
+        .then(async (response) => {
+            let res = await response.json();
+            console.log('res getAppartments', res?.message);
+            setAppartments(res?.message?.map((item) => ({
+                ...item, value: item?.apartmentName, label: item?.apartmentName
+            })))
+        })
+        .catch((error) => {
+            console.log('error', error)
+        })
+};
+
+export const getBlock = async (appartmentId, setBlocks) => {
+    let localUrl = `${localApiUrl}/apartment/block/${appartmentId}`;
+    let deployedUrl = `${deployedApiUrl}/apartment/block/${appartmentId}`;
+
+    await fetch(deployedUrl,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+    )
+        .then(async (response) => {
+            let res = await response.json();
+            console.log('res getBlocks', res?.blockResponse);
+            setBlocks(res?.blockResponse?.map((item) => ({
+                ...item, value: item?.blockName, label: item?.blockName
+            })))
+        })
+        .catch((error) => {
+            console.log('error', error)
+        })
+};
+
+export const getFlat = async (blockId, setFlats) => {
+    let localUrl = `${localApiUrl}/apartment/block/flat/${blockId}`;
+    let deployedUrl = `${deployedApiUrl}/apartment/block/flat/${blockId}`;
+
+    await fetch(deployedUrl,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+    )
+        .then(async (response) => {
+            let res = await response.json();
+            console.log('res getFlats', res);
+            setFlats(res?.flatResponse?.map((item) => ({
+                ...item, value: item?.flatName, label: item?.flatName
+            })))
+        })
+        .catch((error) => {
+            console.log('error', error)
+        })
+};
+
+export const validateAddOwnerPayload = (error, setError, value) => {
+    setError(prev => {
+        return ({
+            ...prev,
+            name: isEmpty(value?.name) ? 'please select a value' : '',
+            appartment: isEmpty(value?.appartment) ? 'please select a value' : '',
+            block: isEmpty(value?.block) ? 'please select a value' : '',
+            flat: isEmpty(value?.flat) ? 'please select a value' : '',
+        })
+    })
+};
+
+export const ErrorToastContent = ({ t, isError=true, actionName }) => {
+    return (
+        <div className='d-flex'>
+            <div className='d-flex flex-column'>
+                <div className='d-flex justify-content-between'>
+                    <X size={12} className='cursor-pointer' onClick={() => toast.dismiss(t.id)} />
+                </div>
+                <span className={isError ? "text-danger" : 'text-success'}>{isError ? `Please enter all details..!!` : `${actionName} successfully`}</span>
+            </div>
+        </div>
+    )
+};
+
+export const getAllOwners = async (setUserData) => {
+    let localUrl = `${localApiUrl}/owners`;
+    let deployedUrl = `${deployedApiUrl}/owners`
+
+    await fetch(deployedUrl,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }
+    )
+        .then(async (response) => {
+            let res = await response.json();
+            console.log('res getVerified user', res?.ownersResponse)
+            setUserData(res?.ownersResponse)
+        })
+        .catch((error) => {
+            console.log('error', error)
+        })
+};
+
+export const columns = [
+    {
+        name: 'Flat owner',
+        cell: row => {
+            return (
+                <Fragment>
+                    <h6 className='user-name text-truncate mb-0'>{row.name}</h6>
+                </Fragment>
+            )
+        },
+    },
+    {
+        name: 'Flats',
+        cell: row => {
+            return (
+                <Fragment>
+                    <h6 className='user-name text-truncate mb-0'>{row.unit}</h6>
+                </Fragment>
+            )
+        },
+    },
+    {
+        name: 'Wing name',
+        cell: row => {
+            return (
+                <Fragment>
+                    <h6 className='user-name text-truncate mb-0'>{row.phone}</h6>
+                </Fragment>
+            )
+        },
+    },
+];

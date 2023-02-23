@@ -2,11 +2,14 @@ import React, { Suspense } from 'react'
 
 // ** Router Import
 import Router from './router/Router'
+import { UserProvider } from './utility/context/adminContext'
 
 const App = () => {
   return (
     <Suspense fallback={null}>
-      <Router />
+      <UserProvider>
+        <Router />
+      </UserProvider>
     </Suspense>
   )
 }

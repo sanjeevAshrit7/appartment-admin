@@ -79,3 +79,6 @@ export const selectThemeColors = theme => ({
     neutral30: '#ededed' // for input hover border-color
   }
 })
+
+export const localApiUrl = 'http://localhost:3001/api';
+export const deployedApiUrl = 'http://192.81.213.186:3003/api';

@@ -26,6 +26,12 @@ export default [
         title: 'Owners',
         icon: <Circle/>,
         navLink: '/dashboard/owners'
+      },
+      {
+        id: 'Requests',
+        title: 'Requests',
+        icon: <Circle />,
+        navLink: '/dashboard/unVerifiedUsers'
       }
     ]
   }
