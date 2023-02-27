@@ -28,8 +28,8 @@ export const getAllRequests = async (setUserData) => {
 
 export const verifyUser = async (body, callPendingRequestsApi) => {
 
-    let localUrl = `${localApiUrl}/user/verifyUserByAdmin`;
-    let deployedUrl = `${deployedApiUrl}/user/verifyUserByAdmin`;
+    let localUrl = `${localApiUrl}/admin/verifyUserByAdmin`;
+    let deployedUrl = `${deployedApiUrl}/admin/verifyUserByAdmin`;
 
     console.log('body', body)
 

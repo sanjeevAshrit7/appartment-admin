@@ -110,6 +110,7 @@ const OwnersTable = (props) => {
                         <Card className='card-company-table mt-5'>
                             <Table
                                 responsive
+                                className={'table table-hover'}
                             >
                                 <thead>
                                     <tr>

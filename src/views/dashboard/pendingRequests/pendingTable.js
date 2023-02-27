@@ -109,7 +109,7 @@ const PendingTable = (props) => {
                     :
                     (!isEmpty(userData)) ?
                         <Card className='card-company-table'>
-                            <Table responsive>
+                            <Table responsive className={'table table-hover'}>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
